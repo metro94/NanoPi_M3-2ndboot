@@ -20,8 +20,8 @@
 
 #include "aarch64_Vectors.inc"
 
-        .align 9, 0    // 2^9 = 512 bytes sector size
-	.skip 0x200, 0x00
+//        .align 9, 0    // 2^9 = 512 bytes sector size
+//	.skip 0x200, 0x00
 
 /*
  * entry point of main function
@@ -80,12 +80,12 @@ clbss_e:
         // L2CTLR_EL1
         mrs     x0, S3_1_c11_c0_2                   // Read L2 Control Register
         orr     x0, x0, #(1<<21)                    // [21]ECC, parity enable.
-        orr     x0, x0, #(1<<20)                    // [22]Data inline ECC enable.
+        orr     x0, x0, #(1<<22)                    // [22]Data inline ECC enable.
                                                     //     only applies if ECC is enabled
 //        and     x0, x0, #~(1<<5)                    // [5]L2 Data RAM input latency (1 cycle)
         orr     x0, x0, #(1<<5)                     // [5]L2 Data RAM input latency (2 cycle)
 //        and     x0, x0, #~(1<<5)                    // [0]L2 Data RAM output latency (2 cycle)
-        orr     x0, x0, #(1<<5)                     // [0]L2 Data RAM output latency (3 cycle)
+        orr     x0, x0, #(1<<0)                     // [0]L2 Data RAM output latency (3 cycle)
         msr     S3_1_c11_c0_2, x0                   // Write L2 Control Register
 
         // L2ECTLR_EL1 - do not touch yet

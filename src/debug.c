@@ -103,6 +103,9 @@ CBOOL DebugInit( U32 port )
 	U32 GPIO_TXD = GPIOALTNUM[port * 2 + 1];
 	U32 GPIO_RXD = GPIOALTNUM[port * 2 + 0];
 
+//	if (pReg_ClkPwr != 0xc0010000)
+//		WriteIO32(0xc001b020, (ReadIO32(0xc001b020) & ~(3 << 24)) | (2 << 24));
+
 	NX_CLKPWR_SetOSCFreq( OSC_KHZ );
 
 	SOURCE_CLOCK = NX_CLKPWR_GetPLLFreq(NX_CLKSRC_UART);

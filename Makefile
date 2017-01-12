@@ -76,7 +76,7 @@ $(DIR_OBJOUTPUT)/%.o: src/%.S
 ###################################################################################################
 
 
-all: mkobjdir $(SYS_OBJS_LIST) link bin
+all: mkobjdir $(SYS_OBJS_LIST) link bin build
 
 mkobjdir:
 ifeq ($(OS),Windows_NT)
@@ -131,6 +131,15 @@ else
 		$(RMDIR) $(DIR_TARGETOUTPUT);		\
 	fi;
 endif
+
+###################################################################################################
+build:
+	@echo [build.... $(DIR_TARGETOUTPUT)/$(TARGET_NAME).img]
+	@../s5p6818_spl/tools/build reference-nsih/nanopi_m3-usb-64.bin $(DIR_TARGETOUTPUT)/$(TARGET_NAME).bin $(DIR_TARGETOUTPUT)/$(TARGET_NAME).img
+
+install:
+	@echo [install to device....]
+	@../s5p6818_spl/tools/load $(DIR_TARGETOUTPUT)/$(TARGET_NAME).img
 
 -include $(SYS_OBJS_LIST:.o=.d)
 

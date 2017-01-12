@@ -62,8 +62,8 @@ union DWtoB
 #define nop() __asm__ __volatile__("mov\tx0,x0\t\r\n nop\n\t");
 #endif
 
-extern inline void ResetCon(U32 devicenum, CBOOL en);
-extern inline void DMC_Delay(int milisecond);
+extern void ResetCon(U32 devicenum, CBOOL en);
+extern void DMC_Delay(int milisecond);
 
 struct phy_lock_info {
 	U32 val;
@@ -686,7 +686,7 @@ CBOOL DDR_CA_Calibration(void)
 	// m_printf("     0. Stopping Cal Mode : change CMD SDLL Code to offsetd
 	// (Code = VWMC - T/4)\n");
 	// m_printf("     1. Continuing Cal Mode(Code = VWMC)\n");
-	// m_printf("\n▶ Enter : ");
+	// m_printf("\n\A2\BA Enter : ");
 
 	// keep_cacal_mode = cgetn();
 	keep_cacal_mode = 1; //- 0:Stopping Cal Mode,          1:Continuing Cal
@@ -706,7 +706,7 @@ CBOOL DDR_CA_Calibration(void)
 	SetIO32(&pReg_DDRPHY->PHY_CON[0],
 		(0x1 << 16)); // ctrl_wrlvl_en(wrlvl_mode)[16]="1" (Enable)
 
-	//- ★ Enabling "CA Calibration Mode" for Controller
+	//- \A1\DA Enabling "CA Calibration Mode" for Controller
 	//- Although CA calibration is normally complete, ENABLE or DISABLE of
 	//"rdlvl_ca_en" for normal operation representes whether CA calibration
 	//mode is being kept or not
@@ -941,8 +941,8 @@ CBOOL DDR_CA_Calibration(void)
 //  < Step8 >
 //#############
 
-//* CA Cal 첫 번재 PASS부터  연속 3회 PASS이면 PASS인 것으로 간주하고,
-//  연속 3회 PASS인 경우의 첫 번째 PASS일 때의 code가 vwml값이 됨.
+//* CA Cal 첫 \B9\F8\C0\E7 PASS\BA\CE\C5\CD  \BF\AC\BC\D3 3회 PASS\C0見\E9 PASS\C0\CE \B0\CD\C0\B8\B7\CE \B0\A3\C1\D6\C7構\ED,
+//  \BF\AC\BC\D3 3회 PASS\C0\CE \B0\E6\BF\EC\C0\C7 첫 \B9\F8째 PASS\C0\CF \B6\A7\C0\C7 code\B0\A1 vwml\B0\AA\C0\CC \B5\CA.
 //* To find "VWML", if consecutive PASS is more than three times, consider as
 //first PASS and keep searching right margin until failure occurs.
 //- First one of consecutive three times PASS is "VWML"
@@ -961,10 +961,10 @@ CBOOL DDR_CA_Calibration(void)
 			}
 		} else if (((find_vmw > 0x0) && (find_vmw < 0x3)) &&
 			   ((mr41 != resp_mr41) || (mr48 != resp_mr48))) {
-			find_vmw = 0x0; //- 첫 번째 PASS로부터 연속 3회 PASS
-					//하지 못하면 연속 3회 PASS가 발생할
-					//때까지 Searching 다시 시작하도록
-					//"find_vmw" = "0"으로 초기화.
+			find_vmw = 0x0; //- 첫 \B9\F8째 PASS\B7觀\CE\C5\CD \BF\AC\BC\D3 3회 PASS
+					//\C7\CF\C1\F6 \B8\F8\C7玖\E9 \BF\AC\BC\D3 3회 PASS\B0\A1 \B9澁\FD\C7\D2
+					//\B6\A7\B1\EE\C1\F6 Searching \B4母\C3 \BD\C3\C0\DB\C7溝\B5\B7\CF
+					//"find_vmw" = "0"\C0\B8\B7\CE \C3珂\E2화.
 		}
 
 		//*** Finding rightmost code value. "VWMR" is the same as code
@@ -992,7 +992,7 @@ CBOOL DDR_CA_Calibration(void)
 		//*** CMD SDLL Code : ctrl_offsetd[7:0] is made of total 8-bit,
 		//so maximum value is 255.
 		//*** Therefore, offset value more than 255 should be considered
-		//as ★error
+		//as \A1\DAerror
 		//*** The code below denotes right sequence for managing error
 		//case.
 
@@ -1010,7 +1010,7 @@ CBOOL DDR_CA_Calibration(void)
 	//##################
 
 	vwmc = (vwml + vwmr) / 2;
-	printf(" \n★ CH%d : CA Calibration ▶ VWMC = (VWML + VWMR)/2 = (%d + "
+	printf(" \n\A1\DA CH%d : CA Calibration \A2\BA VWMC = (VWML + VWMR)/2 = (%d + "
 	       "%d)/2 = %d \n",
 	       ch, vwml, vwmr, vwmc);
 
@@ -1022,9 +1022,9 @@ CBOOL DDR_CA_Calibration(void)
 	code = vwmc - (gDDR_Lock >> 2); //- (lock >> 2) means "T/4", lock value
 					//means the number of delay cell for one
 					//period
-	printf(" \n★ [CH%d] Lock Value : %d ,  VWMC : %d", ch, gDDR_Lock,
+	printf(" \n\A1\DA [CH%d] Lock Value : %d ,  VWMC : %d", ch, gDDR_Lock,
 	       vwmc);
-	printf(" \n★ CH%d : CMD SDLL Code(with disabling CA Cal) = offsetd = "
+	printf(" \n\A1\DA CH%d : CMD SDLL Code(with disabling CA Cal) = offsetd = "
 	       "VWMC - T/4(%d) = %d\n",
 	       ch, (gDDR_Lock >> 2), code);
 
@@ -1047,9 +1047,9 @@ ca_error_ret:
 	ClearIO32(&pReg_DDRPHY->PHY_CON[10],
 		  (0x1 << 24)); // ctrl_resync[24]=0x0 (LOW)
 
-	//※ When CA calibration is only progressing, ctrl_wrlvl_en[16] should
+	//\A1\D8 When CA calibration is only progressing, ctrl_wrlvl_en[16] should
 	//be "1"
-	//※ If CA calibration is complete, set ctrl_wrlvl_en[16] to "0" at last
+	//\A1\D8 If CA calibration is complete, set ctrl_wrlvl_en[16] to "0" at last
 	//step.
 	ClearIO32(&pReg_DDRPHY->PHY_CON[0],
 		  (0x1 << 16)); // ctrl_wrlvl_en(wrlvl_mode)[16]="0"(Disable)

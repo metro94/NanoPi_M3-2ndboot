@@ -43,7 +43,7 @@
 #define nop() __asm__ __volatile__("mov\tr0,r0\t@ nop\n\t");
 
 extern void setMemPLL(int);
-extern inline void DMC_Delay(int milisecond);
+extern void DMC_Delay(int milisecond);
 
 U32 g_Lock_Val;
 U32 g_WR_lvl;
@@ -482,11 +482,11 @@ CBOOL DDR_CA_Calibration(void)
 				}
 				//                printf("+ %d\r\n", code);
 			} else {
-				find_vmw = 0x0; //- 첫 번째 PASS로부터 연속 3회
-						//PASS 하지 못하면 연속 3회
-						//PASS가 발생할 때까지 Searching
-						//다시 시작하도록 "find_vmw" =
-						//"0"으로 초기화.
+				find_vmw = 0x0; //- 첫 \B9\F8째 PASS\B7觀\CE\C5\CD \BF\AC\BC\D3 3회
+						//PASS \C7\CF\C1\F6 \B8\F8\C7玖\E9 \BF\AC\BC\D3 3회
+						//PASS\B0\A1 \B9澁\FD\C7\D2 \B6\A7\B1\EE\C1\F6 Searching
+						//\B4母\C3 \BD\C3\C0\DB\C7溝\B5\B7\CF "find_vmw" =
+						//"0"\C0\B8\B7\CE \C3珂\E2화.
 				//                printf("- %d\r\n", code);
 			}
 		} else if ((mr41 != RESP_MR41) || (mr48 != RESP_MR48)) {
