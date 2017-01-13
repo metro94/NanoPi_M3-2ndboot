@@ -20,6 +20,14 @@
 
 #include "aarch64_Vectors.inc"
 
+.macro ledoff
+    ldr     x21, =0xc001b020
+    ldr     x20, [x21]
+    bic     x20, x20, #(3 << 24)
+    orr     x20, x20, #(2 << 24)
+    str     x20, [x21]
+.endm
+
 //        .align 9, 0    // 2^9 = 512 bytes sector size
 //	.skip 0x200, 0x00
 

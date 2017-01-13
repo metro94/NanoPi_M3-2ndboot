@@ -28,7 +28,8 @@
 //------------------------------------------------------------------------------
 //#define ARCH_S5P4418
 //#define ARCH_NXP4330
-#define ARCH_NXP5430
+//#define ARCH_NXP5430
+#define ARCH_S5P6818
 
 //------------------------------------------------------------------------------
 //  Memory Type
@@ -44,8 +45,8 @@
 //  System optional.
 //------------------------------------------------------------------------------
 #define MULTICORE_SLEEP_CONTROL (1)
-#define MULTICORE_BRING_UP (0)
+#define MULTICORE_BRING_UP (1)
 #define CCI400_COHERENCY_ENABLE (1)
-#define CONFIG_RESET_AFFINITY_ID (1) // Dependent kernel 3.18.x
+#define CONFIG_RESET_AFFINITY_ID (0) // Dependent kernel 3.18.x
 
 #endif //	__CFG_BOOT_DEFINE_H__

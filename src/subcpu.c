@@ -58,6 +58,7 @@ void BringUpSlaveCPU(U32 CPUID)
 	WriteIO32(&pReg_ClkPwr->CPURESETMODE, 0x1);
 	WriteIO32(&pReg_ClkPwr->CPUPOWERONREQ, (1 << CPUID));
 	ClearIO32(&pReg_ClkPwr->CPUPOWERONREQ, (1 << CPUID));
+	WriteIO32(&pReg_ClkPwr->CPURESETMODE, 0x0);
 }
 
 void SetVectorLocation(U32 CPUID, CBOOL LowHigh)

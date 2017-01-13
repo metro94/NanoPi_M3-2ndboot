@@ -199,7 +199,7 @@ struct NX_SecondBootInfo {
 
 	U32 Stub[(0x1EC - 0x0C4) / 4]; // 0x0C4 ~ 0x1EC
 #endif
-#if defined(ARCH_NXP5430)
+#if defined(ARCH_NXP5430) || defined(ARCH_S5P6818)
 	U32 DVO[9]; // 0x074 ~ 0x094
 
 	struct NX_DDRInitInfo DII; // 0x098 ~ 0x0BC

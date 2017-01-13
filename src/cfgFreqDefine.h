@@ -33,6 +33,6 @@
 //------------------------------------------------------------------------------
 #define NX_CLKSRC_UART (NX_CLKSRC_PLL_2)
 #define NX_CLKSRC_SDMMC (NX_CLKSRC_PLL_2)
-#define NX_CLKSRC_SPI (NX_CLKSRC_PLL_0)
+#define NX_CLKSRC_SPI (NX_CLKSRC_PLL_2)
 
 #endif /* __CFG_FREQ_DEFINE_H__ */

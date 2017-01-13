@@ -24,7 +24,7 @@
 #if defined(ARCH_NXP4330) || defined(ARCH_S5P4418)
 #include <nx_pyrope.h>
 #endif
-#if defined(ARCH_NXP5430)
+#if defined(ARCH_NXP5430) || defined(ARCH_S5P6818)
 #include <nx_peridot.h>
 #endif
 #include <nx_type.h>
@@ -109,7 +109,7 @@ struct NX_WDT_RegisterSet *const pReg_WDT =
     (struct NX_WDT_RegisterSet * const)PHY_BASEADDR_WDT_MODULE;
 struct NX_RTC_RegisterSet *const pReg_RTC =
     (struct NX_RTC_RegisterSet * const)PHY_BASEADDR_RTC_MODULE;
-#if defined(ARCH_NXP5430)
+#if defined(ARCH_NXP5430) || defined(ARCH_S5P6818)
 struct NX_DREXTZ_RegisterSet *const pReg_DrexTZ =
     (struct NX_DREXTZ_RegisterSet * const)PHY_BASEADDR_DREX_TZ_MODULE;
 struct NX_CCI400_RegisterSet *const pReg_CCI400 =
@@ -137,7 +137,7 @@ extern struct NX_DREXSDRAM_RegisterSet *const pReg_Drex;
 extern struct NX_DDRPHY_RegisterSet *const pReg_DDRPHY;
 extern struct NX_WDT_RegisterSet *const pReg_WDT;
 extern struct NX_RTC_RegisterSet *const pReg_RTC;
-#if defined(ARCH_NXP5430)
+#if defined(ARCH_NXP5430) || defined(ARCH_S5P6818)
 extern struct NX_DREXTZ_RegisterSet *const pReg_DrexTZ;
 extern struct NX_CCI400_RegisterSet *const pReg_CCI400;
 extern struct NX_GIC400_RegisterSet *const pReg_GIC400;
